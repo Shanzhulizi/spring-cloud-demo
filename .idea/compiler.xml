@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="service-order" />
         <module name="service-product" />
+        <module name="model" />
       </profile>
     </annotationProcessing>
   </component>
