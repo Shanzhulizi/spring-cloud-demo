@@ -1,0 +1,19 @@
+server:
+  port: 9000
+
+spring:
+  application:
+    name: service-product
+  cloud:
+    nacos:
+      server-addr: 127.0.0.1:8848
+  # 这里就是引入配置中心的配置
+#  config:
+#    import:
+#      nacos: service-order.properties
+#      暂时用不到配置中心，禁用对nacos的导入检查
+      config:
+        import-check:
+          enabled: false
+
+
