@@ -1,6 +1,7 @@
 package com.lm.order.service.impl;
 
 import com.lm.order.bean.Order;
+import com.lm.order.feign.ProductFeignClient;
 import com.lm.order.service.OrderService;
 import com.lm.product.bean.Product;
 import lombok.extern.slf4j.Slf4j;
@@ -26,11 +27,15 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     LoadBalancerClient loadBalancerClient;
 
+    @Autowired
+    private ProductFeignClient productFeignClient;
+
     @Override
     public Order createOrder(Long productId, Long userId) {
         //从远程商品服务获取商品信息
-        Product product = getProductFromRemoteWithBalance2(productId);
-
+//        Product product = getProductFromRemoteWithBalance2(productId);
+        //使用OpenFeign获取商品信息
+        Product product = productFeignClient.getProductById(productId);
         // 这里可以进行订单创建逻辑
         Order order = new Order();
         order.setId(productId);
