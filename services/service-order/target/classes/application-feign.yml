@@ -1,0 +1,26 @@
+spring:
+  cloud:
+    openfeign:
+      client:
+        config:
+#          默认配置
+          default:
+            connect-timeout: 10000
+            read-timeout: 10000
+            logger-level: full
+#         service-order的配置
+          service-product:
+            connect-timeout: 10000
+            read-timeout: 10000
+            logger-level: full
+            retryer: feign.Retryer.Default
+
+    sentinel:
+      transport:
+        dashboard: localhost:8080
+      eager: true #提前加载
+# 开启 Sentinel Feign
+feign:
+  sentinel:
+    enabled: true
+

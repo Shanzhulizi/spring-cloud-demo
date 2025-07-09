@@ -2,13 +2,16 @@ server:
   port: 8000
 
 spring:
+  profiles:
+    active: dev
+    include: feign
   application:
     name: service-order
   cloud:
     nacos:
       server-addr: 127.0.0.1:8848
       config:
-        namespace: dev
+        namespace: ${spring.profiles.active}
   # 这里就是引入配置中心的配置
   config:
     import:
@@ -47,5 +50,8 @@ spring:
       on-profile: prod
 
 
+logging:
+  level:
+    com.lm.order.feign: debug
 
 
