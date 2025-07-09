@@ -19,6 +19,7 @@ spring:
       transport:
         dashboard: localhost:8080
       eager: true #提前加载
+      web-context-unify: false # 关闭上下文统一
 # 开启 Sentinel Feign
 feign:
   sentinel:

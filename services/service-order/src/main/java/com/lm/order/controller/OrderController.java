@@ -50,4 +50,11 @@ public class OrderController {
     }
 
 
+    @GetMapping("/seckill")
+    public Order seckill(@RequestParam("productId") Long productId, @RequestParam("userId")  Long userId) {
+        Order order = orderService.createOrder(productId, userId);
+        order.setId(Long.MAX_VALUE);
+        return order; //     如果需要返回订单信息，可以取消注释
+    }
+
 }

@@ -1,5 +1,7 @@
 package com.lm.order.service.impl;
 
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
+import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.lm.order.bean.Order;
 import com.lm.order.feign.ProductFeignClient;
 import com.lm.order.service.OrderService;
@@ -30,6 +32,7 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private ProductFeignClient productFeignClient;
 
+    @SentinelResource(value = "createOrder" ,blockHandler = "createOrderFallback" )
     @Override
     public Order createOrder(Long productId, Long userId) {
         //从远程商品服务获取商品信息
@@ -53,6 +56,14 @@ public class OrderServiceImpl implements OrderService {
 
         return order;
     }
+
+    //兜底回调
+    public Order createOrderFallback(Long productId, Long userId, BlockException e){
+        Order order=new Order();
+
+        return order;
+    }
+
 
     /**
      * 基于负载均衡客户端获取商品信息

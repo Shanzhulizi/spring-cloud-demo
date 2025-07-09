@@ -15,5 +15,8 @@ spring:
       config:
         import-check:
           enabled: false
-
+    sentinel:
+      transport:
+        dashboard: localhost:8080
+      eager: true #提前加载
 
